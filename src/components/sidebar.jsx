@@ -2,13 +2,8 @@
 
 import { useState } from "react"
 import {
-  Home,
-  Settings,
   User,
   FileText,
-  BarChart3,
-  Mail,
-  Calendar,
   ChevronLeft,
   ChevronRight,
   Menu,
@@ -26,7 +21,7 @@ const sidebarItems = [
 
 const sidebarItems2 = [
   { icon: IdCardIcon, label: "Employee Management", href: "/" },
-  { icon: Fingerprint, label: "Attendance and Biometrics", href: "/profile" },
+  { icon: Fingerprint, label: "Attendance and Biometrics", href: "/pages/human-resource/attendance-and-biometrics" },
   { icon: FileText, label: "Payroll Processing", href: "/documents" },
 ]
 
@@ -66,12 +61,7 @@ export default function Sidebar({ className = "", ...props }) {
           {/* Header */}
           <div className="flex h-16 items-center justify-between px-4 border-b border-gray-200">
             {!isCollapsed && <h2 className="text-lg font-semibold text-gray-900">Dashboard</h2>}
-            <button
-              onClick={toggleCollapsed}
-              className="hidden md:flex h-8 w-8 items-center justify-center rounded-md text-gray-600 hover:bg-gray-100"
-            >
-              {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-            </button>
+            
           </div>
 
           {/* Navigation */}
@@ -169,20 +159,7 @@ export default function Sidebar({ className = "", ...props }) {
           </nav>
 
 
-          {/* Footer */}
-          <div className="border-t border-gray-200 p-4">
-            <div className={`flex items-center gap-3 ${isCollapsed ? "justify-center" : ""}`}>
-              <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center">
-                <User className="h-4 w-4 text-white" />
-              </div>
-              {!isCollapsed && (
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">John Doe</p>
-                  <p className="text-xs text-gray-500 truncate">john@example.com</p>
-                </div>
-              )}
-            </div>
-          </div>
+          
         </div>
       </aside>
     </>
