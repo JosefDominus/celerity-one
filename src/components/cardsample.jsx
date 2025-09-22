@@ -18,7 +18,7 @@ export function CardDemo() {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
-        <CardTitle>Welcome to Pronbuh.com</CardTitle>
+        <CardTitle>Sample Change</CardTitle>
         <CardDescription>
           Login to your account
         </CardDescription>
