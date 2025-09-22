@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Facebook } from "lucide-react"
 import { Youtube } from "lucide-react"
+import { Github } from "lucide-react"
 import Link from "next/link"
 
 export function CardDemo() {
@@ -54,9 +55,11 @@ export function CardDemo() {
         </form>
       </CardContent>
       <CardFooter className="flex-col gap-2">
+        <Link href = "/pages/dashboard">
         <Button type="submit" className="w-full">
           Login
         </Button>
+        </Link>
         <div className = "flex flex-row gap-2">
         <Link href="https://www.facebook.com/xSeffiro/" target = "_blank">
         <Button variant="outline" className="w-full">
@@ -64,9 +67,15 @@ export function CardDemo() {
         </Button>
         </Link>
 
-        <Link href="https://www.youtube.com">
+        <Link href="https://www.youtube.com" target = "_blank">
         <Button variant="outline" className="w-full">
          <Youtube />
+        </Button>
+        </Link>
+
+        <Link href="https://github.com/JosefDominus/celerity-one" target = "_blank">
+        <Button variant="outline" className="w-full">
+        <Github />
         </Button>
         </Link>
         </div>
