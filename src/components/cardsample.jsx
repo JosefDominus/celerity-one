@@ -19,7 +19,7 @@ export function CardDemo() {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
-        <CardTitle>Sample Change</CardTitle>
+        <CardTitle>Welcome to Celerity One</CardTitle>
         <CardDescription>
           Login to your account
         </CardDescription>
@@ -54,7 +54,7 @@ export function CardDemo() {
           </div>
         </form>
       </CardContent>
-      <CardFooter className="flex-col gap-2">
+      <CardFooter className="flex-col gap-2 ">
         <Link href = "/pages/dashboard">
         <Button type="submit" className="w-full">
           Login

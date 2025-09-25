@@ -20,7 +20,7 @@ const sidebarItems = [
 ]
 
 const sidebarItems2 = [
-  { icon: IdCardIcon, label: "Employee Management", href: "/" },
+  { icon: IdCardIcon, label: "Employee Management", href: "/pages/human-resource/employee-management" },
   { icon: Fingerprint, label: "Attendance and Biometrics", href: "/pages/human-resource/attendance-and-biometrics" },
   { icon: FileText, label: "Payroll Processing", href: "/documents" },
 ]
