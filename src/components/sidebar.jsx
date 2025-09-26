@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import { usePathname } from "next/navigation"
+import Link from "next/link"
 import {
   FileText,
   Menu,
@@ -12,9 +14,7 @@ import {
   BanknoteArrowDown,
 } from "lucide-react"
 
-const sidebarItems = [
-  { icon: ChartPie, label: "Overview/Analytics", href: "/" },
-]
+const sidebarItems = [{ icon: ChartPie, label: "Overview/Analytics", href: "/" }]
 
 const sidebarItems2 = [
   { icon: IdCardIcon, label: "Employee Management", href: "/pages/human-resource/employee-management" },
@@ -30,9 +30,40 @@ const sidebarItems3 = [
 export default function Sidebar({ className = "", ...props }) {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const pathname = usePathname()
 
   const toggleCollapsed = () => setIsCollapsed(!isCollapsed)
   const toggleMobile = () => setIsMobileOpen(!isMobileOpen)
+
+  const isActive = (href) => pathname === href
+
+  const handleLinkClick = (e) => {
+    setTimeout(() => {
+      e.target.blur()
+    }, 100)
+  }
+
+  const renderNavItem = (item) => {
+    const Icon = item.icon
+    const active = isActive(item.href)
+
+    return (
+      <Link
+        key={item.href}
+        href={item.href}
+        onClick={handleLinkClick}
+        className={`flex items-center gap-3 rounded-lg px-3 py-2 text-gray-700 transition-colors focus:outline-none ${
+          active
+            ? "bg-blue-100 text-blue-900" // Active state styling
+            : "hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900"
+        } ${isCollapsed ? "justify-center px-2" : ""}`}
+        title={isCollapsed ? item.label : undefined}
+      >
+        <Icon className="h-5 w-5 flex-shrink-0" />
+        {!isCollapsed && <span className="text-sm font-medium">{item.label}</span>}
+      </Link>
+    )
+  }
 
   return (
     <>
@@ -58,105 +89,26 @@ export default function Sidebar({ className = "", ...props }) {
           {/* Header */}
           <div className="flex h-16 items-center justify-between px-4 border-b border-gray-200">
             {!isCollapsed && <h2 className="text-lg font-semibold text-gray-900">Dashboard</h2>}
-            
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 space-y-1 p-4">
-            {sidebarItems.map((item) => {
-              const Icon = item.icon
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none ${
-                    isCollapsed ? "justify-center px-2" : ""
-                  }`}
-                  title={isCollapsed ? item.label : undefined}
-                >
-                  <Icon className="h-5 w-5 flex-shrink-0" />
-                  {!isCollapsed && <span className="text-sm font-medium">{item.label}</span>}
-                </a>
-              )
-            })}
-          </nav>
+          <nav className="flex-1 space-y-1 p-4">{sidebarItems.map(renderNavItem)}</nav>
 
-           {/* Header */}
+          {/* Header */}
           <div className="flex h-16 items-center justify-between px-4 border-b border-gray-200">
             {!isCollapsed && <h2 className="text-lg font-semibold text-gray-900">Human Resources</h2>}
-           
           </div>
-          
 
+          {/* Navigation */}
+          <nav className="flex-1 space-y-1 p-4">{sidebarItems2.map(renderNavItem)}</nav>
 
-
-           {/* Navigation */}
-          <nav className="flex-1 space-y-1 p-4">
-            {sidebarItems2.map((item) => {
-              const Icon = item.icon
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none ${
-                    isCollapsed ? "justify-center px-2" : ""
-                  }`}
-                  title={isCollapsed ? item.label : undefined}
-                >
-                  <Icon className="h-5 w-5 flex-shrink-0" />
-                  {!isCollapsed && <span className="text-sm font-medium">{item.label}</span>}
-                </a>
-
-
-
-
-                
-
-
-
-              )
-            })}
-          </nav>
-
-                     {/* Header */}
+          {/* Header */}
           <div className="flex h-16 items-center justify-between px-4 border-b border-gray-200">
             {!isCollapsed && <h2 className="text-lg font-semibold text-gray-900">Financial Management</h2>}
-           
           </div>
-          
 
-
-
-           {/* Navigation */}
-          <nav className="flex-1 space-y-1 p-4">
-            {sidebarItems3.map((item) => {
-              const Icon = item.icon
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none ${
-                    isCollapsed ? "justify-center px-2" : ""
-                  }`}
-                  title={isCollapsed ? item.label : undefined}
-                >
-                  <Icon className="h-5 w-5 flex-shrink-0" />
-                  {!isCollapsed && <span className="text-sm font-medium">{item.label}</span>}
-                </a>
-
-
-
-
-                
-
-
-
-              )
-            })}
-          </nav>
-
-
-          
+          {/* Navigation */}
+          <nav className="flex-1 space-y-1 p-4">{sidebarItems3.map(renderNavItem)}</nav>
         </div>
       </aside>
     </>

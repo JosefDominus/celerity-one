@@ -15,7 +15,7 @@ import { DialogDemo } from "@/components/employeemodal";
 
 export default function PayrollPage() {
 
-  
+
 return(
  <div className="min-h-screen flex">
 
@@ -57,7 +57,6 @@ return(
                   </TableCell>
                   <TableCell>
                     <div className="flex flex-row justify-center gap-2">
-                      <Button variant="outline"><UserRoundPen/>Edit</Button>
                       <DialogDemo/></div>
                   </TableCell>
                 </TableRow>
