@@ -23,8 +23,8 @@ const sidebarItems2 = [
 ]
 
 const sidebarItems3 = [
-  { icon: PhilippinePeso, label: "Sales and Revenue", href: "/" },
-  { icon: BanknoteArrowDown, label: "Expenses", href: "/profile" },
+  { icon: PhilippinePeso, label: "Sales and Revenue", href: "/pages/financial-management/sales-and-revenue" },
+  { icon: BanknoteArrowDown, label: "Expenses", href: "/pages/financial-management/expenses" },
 ]
 
 export default function Sidebar({ className = "", ...props }) {
