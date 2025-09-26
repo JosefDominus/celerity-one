@@ -2,10 +2,7 @@
 
 import { useState } from "react"
 import {
-  User,
   FileText,
-  ChevronLeft,
-  ChevronRight,
   Menu,
   X,
   ChartPie,
@@ -22,7 +19,7 @@ const sidebarItems = [
 const sidebarItems2 = [
   { icon: IdCardIcon, label: "Employee Management", href: "/pages/human-resource/employee-management" },
   { icon: Fingerprint, label: "Attendance and Biometrics", href: "/pages/human-resource/attendance-and-biometrics" },
-  { icon: FileText, label: "Payroll Processing", href: "/documents" },
+  { icon: FileText, label: "Payroll Processing", href: "/pages/human-resource/payroll-processing" },
 ]
 
 const sidebarItems3 = [

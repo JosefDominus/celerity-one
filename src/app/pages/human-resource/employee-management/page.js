@@ -12,6 +12,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Eye, Trash2, UserPlus, UserRoundPen, UserSearch } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+//add mock data later const = mockemployee
 
 export default function EmployeePage() {
   return (
@@ -23,7 +26,6 @@ export default function EmployeePage() {
 
       
       <div className="flex-1 ml-64 p-8">
-        {/* Top action buttons */}
         <div className="flex justify-between mb-6">
         <div className="flex w-full max-w-sm items-center gap-2">
             <Input placeholder="Search" />
@@ -44,24 +46,34 @@ export default function EmployeePage() {
               <TableCaption>A list of Celerity One Employees</TableCaption>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[100px]">Employee ID</TableHead>
-                  <TableHead>First Name</TableHead>
-                  <TableHead>Last Name</TableHead>
-                  <TableHead>Email Address</TableHead>
-                  <TableHead className="text-center">Actions</TableHead>
+                   <TableHead className="border border-gray-400 bg-gray-200">Picture</TableHead> 
+                  <TableHead className="w-[100px] border border-gray-400 bg-gray-200">Employee ID</TableHead>
+                  <TableHead className="text-center border border-gray-400 bg-gray-200">First Name</TableHead>
+                  <TableHead className="text-center border border-gray-400 bg-gray-200">Last Name</TableHead>
+                  <TableHead className="text-center border border-gray-400 bg-gray-200">Department</TableHead>
+                  <TableHead className="text-center border border-gray-400 bg-gray-200">Email Address</TableHead>
+                  <TableHead className="text-center border border-gray-400 bg-gray-200">Position</TableHead>
+                  <TableHead className="text-center border border-gray-400 bg-gray-200">Hourly Rate</TableHead>
+                  <TableHead className="text-center border border-gray-400 bg-gray-200">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 <TableRow>
+                <TableCell><Avatar className="rounded-lg">
+        <AvatarImage src="/dp.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar></TableCell>
                   <TableCell className="font-medium">0001</TableCell>
                   <TableCell>Josef Dominic</TableCell>
                   <TableCell>Valdes</TableCell>
+                  <TableCell>Department</TableCell>
                   <TableCell>josefcute@gmail.com</TableCell>
+                  <TableCell>Senior Software Engineer</TableCell>
+                  <TableCell>25,000</TableCell>
                   <TableCell>
                     <div className="flex flex-row justify-center gap-2">
                       <Button variant="outline"><UserRoundPen/>Edit</Button>
                       <Button variant="destructive"><Trash2/>Delete</Button>
-                      <Button><Eye/>View</Button>
                     </div>
                   </TableCell>
                 </TableRow>
