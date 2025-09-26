@@ -10,7 +10,12 @@ import { DialogDemo } from "@/components/employeemodal";
 
 
 
+
+
+
 export default function PayrollPage() {
+
+  
 return(
  <div className="min-h-screen flex">
 

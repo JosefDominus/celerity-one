@@ -1,87 +1,140 @@
-import Sidebar from "@/components/sidebar";
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {  Trash2, UserPlus, UserRoundPen, UserSearch } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
-//add mock data later const = mockemployee
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import Sidebar from "@/components/sidebar"
+import { Eye, Edit, Trash2, Plus, UserSearch, UserPlus } from "lucide-react"
 
 export default function ExpensesPage() {
+  const expenses = [
+    {
+      id: 1,
+      date: "10/27/2024",
+      paymentMode: "Credit Card",
+      number: "1",
+      payee: "Ace Gabriel P.",
+      memo: "Electricity bill for office",
+      category: "Bills",
+      total: "₱34,298.50",
+    },
+    {
+      id: 2,
+      date: "10/27/2024",
+      paymentMode: "Cash",
+      number: "2",
+      payee: "Justin Egonia",
+      memo: "Trello subscription for team",
+      category: "License",
+      total: "₱12,298.50",
+    },
+  ]
+
   return (
     <div className="min-h-screen flex">
-      
-      <div className="w-64 fixed inset-y-0">
+      <div className="w-64 fixed inset-y-0 border-r">
         <Sidebar />
       </div>
 
-      
+     
       <div className="flex-1 ml-64 p-8">
-        <div className="flex justify-between mb-6">
-        <div className="flex w-full max-w-sm items-center gap-2">
+        <div className="flex justify-between items-center mb-6">
+          <div className="flex w-full max-w-sm items-center gap-2">
             <Input placeholder="Search" />
             <Button type="submit" variant="outline">
-            <UserSearch/>
-        </Button>
-    </div>
-          <Button><UserPlus/>New Expenses</Button>
+              <UserSearch className="w-4 h-4" />
+            </Button>
+          </div>
+
+
+          <Button className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2">
+            <UserPlus className="w-4 h-4" />
+            New Expenses
+          </Button>
         </div>
 
-        
-        <Card className="shadow-lg rounded-2xl">
-          <CardHeader>
-            <CardTitle>Employee List</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableCaption>A list of Celerity One Employees</TableCaption>
-              <TableHeader>
-                <TableRow>
-                   <TableHead className="border border-gray-400 bg-gray-200">Picture</TableHead> 
-                  <TableHead className="w-[100px] border border-gray-400 bg-gray-200">Employee ID</TableHead>
-                  <TableHead className="text-center border border-gray-400 bg-gray-200">First Name</TableHead>
-                  <TableHead className="text-center border border-gray-400 bg-gray-200">Last Name</TableHead>
-                  <TableHead className="text-center border border-gray-400 bg-gray-200">Department</TableHead>
-                  <TableHead className="text-center border border-gray-400 bg-gray-200">Email Address</TableHead>
-                  <TableHead className="text-center border border-gray-400 bg-gray-200">Position</TableHead>
-                  <TableHead className="text-center border border-gray-400 bg-gray-200">Hourly Rate</TableHead>
-                  <TableHead className="text-center border border-gray-400 bg-gray-200">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                <TableCell><Avatar className="rounded-lg">
-        <AvatarImage src="/dp.png" alt="@shadcn" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar></TableCell>
-                  <TableCell className="font-medium">0001</TableCell>
-                  <TableCell>Josef Dominic</TableCell>
-                  <TableCell>Valdes</TableCell>
-                  <TableCell>Department</TableCell>
-                  <TableCell>josefcute@gmail.com</TableCell>
-                  <TableCell>Senior Software Engineer</TableCell>
-                  <TableCell>25,000</TableCell>
-                  <TableCell>
-                    <div className="flex flex-row justify-center gap-2">
-                      <Button variant="outline"><UserRoundPen/>Edit</Button>
-                      <Button variant="destructive"><Trash2/>Delete</Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
+
+        <h1 className="text-2xl font-semibold mb-6">
+          Expenses ({expenses.length})
+        </h1>
+
+        <Card>
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b bg-muted/50">
+                    <th className="text-left p-4 font-medium text-muted-foreground min-w-[100px]">
+                      Date
+                    </th>
+                    <th className="text-left p-4 font-medium text-muted-foreground min-w-[140px]">
+                      Mode of Payment
+                    </th>
+                    <th className="text-left p-4 font-medium text-muted-foreground min-w-[60px]">
+                      No.
+                    </th>
+                    <th className="text-left p-4 font-medium text-muted-foreground min-w-[160px]">
+                      Payee
+                    </th>
+                    <th className="text-left p-4 font-medium text-muted-foreground min-w-[200px]">
+                      Memo
+                    </th>
+                    <th className="text-left p-4 font-medium text-muted-foreground min-w-[120px]">
+                      Category
+                    </th>
+                    <th className="text-left p-4 font-medium text-muted-foreground min-w-[120px]">
+                      Total
+                    </th>
+                    <th className="text-left p-4 font-medium text-muted-foreground min-w-[100px]">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {expenses.map((expense) => (
+                    <tr
+                      key={expense.id}
+                      className="border-b hover:bg-muted/30"
+                    >
+                      <td className="p-4">{expense.date}</td>
+                      <td className="p-4">{expense.paymentMode}</td>
+                      <td className="p-4">{expense.number}</td>
+                      <td className="p-4">{expense.payee}</td>
+                      <td className="p-4">{expense.memo}</td>
+                      <td className="p-4">
+                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
+                          {expense.category}
+                        </span>
+                      </td>
+                      <td className="p-4 font-medium">{expense.total}</td>
+                      <td className="p-4">
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            className="p-1 hover:bg-muted rounded"
+                          >
+                            <Eye className="w-4 h-4 text-muted-foreground" />
+                          </button>
+                          <button
+                            type="button"
+                            className="p-1 hover:bg-muted rounded"
+                          >
+                            <Edit className="w-4 h-4 text-muted-foreground" />
+                          </button>
+                          <button
+                            type="button"
+                            className="p-1 hover:bg-muted rounded"
+                          >
+                            <Trash2 className="w-4 h-4 text-muted-foreground" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </CardContent>
         </Card>
       </div>
     </div>
-  );
+  )
 }
