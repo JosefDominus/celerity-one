@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Eye, Trash2, UserPlus, UserRoundPen, UserSearch } from "lucide-react";
+import {  Trash2, UserPlus, UserRoundPen, UserSearch } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 //add mock data later const = mockemployee

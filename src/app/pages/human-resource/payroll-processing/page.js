@@ -6,6 +6,7 @@ import { Table, TableCaption, TableHeader, TableRow, TableBody, TableHead, Table
 import { Button } from "@/components/ui/button";
 import { BadgeCheckIcon, PhilippinePeso, Search, Trash2, UserRoundPen } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { DialogDemo } from "@/components/employeemodal";
 
 
 
@@ -52,8 +53,7 @@ return(
                   <TableCell>
                     <div className="flex flex-row justify-center gap-2">
                       <Button variant="outline"><UserRoundPen/>Edit</Button>
-                      <Button><Search/>View</Button>
-                    </div>
+                      <DialogDemo/></div>
                   </TableCell>
                 </TableRow>
               </TableBody>
