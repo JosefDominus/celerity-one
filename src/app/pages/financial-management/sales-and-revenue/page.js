@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Plus, ChevronDown } from "lucide-react"
 import Sidebar from "@/components/sidebar" 
+import { PurchaseOrderModal } from "@/components/purchasemodal"
 
 
 const mockSalesData = [
@@ -92,10 +93,7 @@ export default function SalesRevenuePage() {
           <h1 className="text-2xl font-semibold text-gray-800">
             All Sales ({salesData.length})
           </h1>
-          <Button className="bg-purple-600 hover:bg-purple-700 text-white">
-            <Plus className="w-4 h-4 mr-2" />
-            New Sales Receipt
-          </Button>
+          <PurchaseOrderModal />
         </div>
 
         

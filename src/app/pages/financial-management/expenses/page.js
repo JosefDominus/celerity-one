@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import Sidebar from "@/components/sidebar"
-import { Eye, Edit, Trash2, Plus, UserSearch, UserPlus } from "lucide-react"
+import { Eye, Edit, Trash2, UserSearch } from "lucide-react"
+import { ExpensesModal } from "@/components/expensesmodal" 
 
 export default function ExpensesPage() {
   const expenses = [
@@ -34,9 +35,9 @@ export default function ExpensesPage() {
         <Sidebar />
       </div>
 
-     
       <div className="flex-1 ml-64 p-8">
         <div className="flex justify-between items-center mb-6">
+          
           <div className="flex w-full max-w-sm items-center gap-2">
             <Input placeholder="Search" />
             <Button type="submit" variant="outline">
@@ -44,13 +45,12 @@ export default function ExpensesPage() {
             </Button>
           </div>
 
-
-          <Button className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2">
-            <UserPlus className="w-4 h-4" />
-            New Expenses
-          </Button>
+          
+          <div className="flex items-center gap-2">
+            
+            <ExpensesModal />
+          </div>
         </div>
-
 
         <h1 className="text-2xl font-semibold mb-6">
           Expenses ({expenses.length})
