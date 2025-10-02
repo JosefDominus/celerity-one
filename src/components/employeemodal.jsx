@@ -13,36 +13,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-
-export function DialogDemo({
-  title = "Employee Payroll Details",
-  employeeId,
-  employeeName,
-  paidHours,
-  grossPay,
-}) {
-
-  const [sss, setSss] = useState(2)
-  const [philhealth, setPhilhealth] = useState(3)
-  const [pagibig, setPagibig] = useState(200)
-  const [tax, setTax] = useState(2)
-  const [otHours, setOtHours] = useState(0)
-  const [allowance, setAllowance] = useState(0)
-  const [allowanceMemo, setAllowanceMemo] = useState("")
-  const [otherDeduction, setOtherDeduction] = useState(0)
-  const [deductionMemo, setDeductionMemo] = useState("")
-
-  // Calculation
-  const sssAmount = (grossPay * sss) / 100
-  const philhealthAmount = (grossPay * philhealth) / 100
-  const taxAmount = (grossPay * tax) / 100
-  const totalDeductions =
-    sssAmount + philhealthAmount + pagibig + taxAmount + otherDeduction
-  const totalAdditions = allowance + otHours * 100 // example rate
-  const netPay = grossPay - totalDeductions + totalAdditions
-
+import { formatPeso } from "@/lib/utils/formatters"
+export function DialogDemo({ firstName, lastName, grossPay, sssDeduction, philhealthDeduction, pagibigDeduction, incomeTaxDeduction, netPay }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -51,95 +24,66 @@ export function DialogDemo({
 
       <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-lg font-semibold">{title}</DialogTitle>
+          <DialogTitle className="text-lg font-semibold">Employee Payroll Details</DialogTitle>
           <DialogDescription className="text-sm text-gray-500">
             Review and adjust payroll details
           </DialogDescription>
         </DialogHeader>
 
-        <form className="space-y-6">
-          {/* Basic Info */}
+        <form className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <Label>Employee Name</Label>
-              <p>{employeeName} </p>
+              <h1 className="font-bold">Employee Name</h1>
+              <p>{firstName} {lastName}</p>
             </div>
+
             <div>
-              <Label>Employee ID</Label>
-              <p>{employeeId} </p>
+              <h1 className="font-bold">Gross Pay </h1>
+              <p>{formatPeso(grossPay)}</p>
             </div>
           </div>
 
-          {/* Gross Pay */}
           <div>
-            <Label>Gross Pay (calculated by hours worked)</Label>
-            <p>{grossPay}</p>
-          </div>
-
-          {/* Deductions */}
-          <div>
-            <h3 className="font-medium">Deductions</h3>
+            <h3 className="font-bold text-xl">Deductions</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
               <div>
-                <Label>SSS (%)</Label>
-                <Input
-                  type="number"
-                  value={sss}
-                  onChange={(e) => setSss(Number(e.target.value))}
-                />
+                <h1 className="font-bold">SSS <span className="font-normal text-slate-400">— 2% of Gross Pay</span></h1>
+                <h1 className="mt-1 text-red-400">- {formatPeso(sssDeduction)}</h1>
               </div>
               <div>
-                <Label>Philhealth (%)</Label>
-                <Input
-                  type="number"
-                  value={philhealth}
-                  onChange={(e) => setPhilhealth(Number(e.target.value))}
-                />
+                <h1 className="font-bold">PhilHealth <span className="font-normal text-slate-400">— 2% of Gross Pay</span></h1>
+                <h1 className="mt-1 text-red-400">- {formatPeso(philhealthDeduction)}</h1>
               </div>
               <div>
-                <Label>Pagibig (₱)</Label>
-                <Input
-                  type="number"
-                  value={pagibig}
-                  onChange={(e) => setPagibig(Number(e.target.value))}
-                />
+                <h1 className="font-bold">Pagibig <span className="font-normal text-slate-400">— ₱100 Fixed</span></h1>
+                <h1 className="mt-1 text-red-400">- {formatPeso(pagibigDeduction)}</h1>
               </div>
               <div>
-                <Label>Tax (%)</Label>
-                <Input
-                  type="number"
-                  value={tax}
-                  onChange={(e) => setTax(Number(e.target.value))}
-                />
+                <h1 className="font-bold">Income Tax <span className="font-normal text-slate-400">— 3% of Gross Pay</span></h1>
+                <h1 className="mt-1 text-red-400">- {formatPeso(incomeTaxDeduction)}</h1>
               </div>
             </div>
           </div>
 
           {/* Additions */}
           <div>
-            <h3 className="font-medium">Additions</h3>
+            <h3 className="font-bold text-xl">Additions</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
               <div>
-                <Label>OT Hours</Label>
-                <Input
-                  type="number"
-                  value={otHours}
-                  onChange={(e) => setOtHours(Number(e.target.value))}
-                />
+                <h1 className="font-bold">OT Hours</h1>
+                <h1 className="mt-1">'N/A'</h1>
               </div>
               <div>
-                <Label>Allowance (₱)</Label>
+                <h1 className="font-bold">Allowance (₱)</h1>
                 <Input
+                  placeholder="Amount"
                   type="number"
-                  value={allowance}
-                  onChange={(e) => setAllowance(Number(e.target.value))}
                 />
               </div>
               <div className="sm:col-span-2">
-                <Label>Allowance Memo</Label>
+                <h1 className="font-bold">Allowance Memo</h1>
                 <Textarea
-                  value={allowanceMemo}
-                  onChange={(e) => setAllowanceMemo(e.target.value)}
+                  placeholder="Enter your allowance memo here"
                 />
               </div>
             </div>
@@ -147,21 +91,19 @@ export function DialogDemo({
 
           {/* Other Deduction */}
           <div>
-            <h3 className="font-medium">Other Deduction</h3>
+            <h3 className="font-bold text-xl">Other Deduction</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
               <div>
-                <Label>Deduction (₱)</Label>
+                <h1 className="font-bold">Deduction (₱)</h1>
                 <Input
+                  placeholder="Amount"
                   type="number"
-                  value={otherDeduction}
-                  onChange={(e) => setOtherDeduction(Number(e.target.value))}
                 />
               </div>
               <div className="sm:col-span-2">
-                <Label>Deduction Memo</Label>
+                <h1 className="font-bold">Deduction Memo</h1>
                 <Textarea
-                  value={deductionMemo}
-                  onChange={(e) => setDeductionMemo(e.target.value)}
+                  placeholder="Enter deduction memo here"
                 />
               </div>
             </div>
@@ -169,8 +111,8 @@ export function DialogDemo({
 
           {/* Net Pay */}
           <div>
-            <Label>Total Net Pay</Label>
-            <p> {netPay.toFixed(2)} </p>
+            <h1 className="font-bold">Total Net Pay</h1>
+            <p className="font-bold text-sm">{formatPeso(netPay)}</p>
           </div>
 
           {/* Footer */}

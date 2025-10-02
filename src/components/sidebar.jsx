@@ -3,28 +3,38 @@
 import { useState } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import {
-  FileText,
-  Menu,
-  X,
-  ChartPie,
-  IdCardIcon,
-  Fingerprint,
-  PhilippinePeso,
-  BanknoteArrowDown,
-} from "lucide-react"
+import { FileText, Menu, X, ChartPie, IdCardIcon, Fingerprint, PhilippinePeso, BanknoteArrowDown, HandCoins } from "lucide-react"
 
-const sidebarItems = [{ icon: ChartPie, label: "Overview/Analytics", href: "/" }]
-
-const sidebarItems2 = [
-  { icon: IdCardIcon, label: "Employee Management", href: "/pages/human-resource/employee-management" },
-  { icon: Fingerprint, label: "Attendance and Biometrics", href: "/pages/human-resource/attendance-and-biometrics" },
-  { icon: FileText, label: "Payroll Processing", href: "/pages/human-resource/payroll-processing" },
-]
-
-const sidebarItems3 = [
-  { icon: PhilippinePeso, label: "Sales and Revenue", href: "/pages/financial-management/sales-and-revenue" },
-  { icon: BanknoteArrowDown, label: "Expenses", href: "/pages/financial-management/expenses" },
+const sidebarConfig = [
+  {
+    name: "Dashbaord",
+    items: [
+      { icon: ChartPie, label: "Overview/Analytics", href: "/dashboard" },
+    ]
+  },
+  {
+    name: "Employees",
+    items: [
+      { icon: IdCardIcon, label: "Employee Management", href: "/employees" },
+      { icon: Fingerprint, label: "Attendance", href: "/employees/attendance" },
+    ]
+  },
+  {
+    name: "Payroll",
+    items: [
+      { icon: HandCoins, label: "Payroll Processing", href: "/payroll" },
+      { icon: FileText, label: "Reports", href: "/payroll/reports" },
+    ]
+  },
+  {
+    name: "Finance",
+    items: [
+      { icon: ChartPie, label: "Overview", href: "/finance" },
+      { icon: PhilippinePeso, label: "Revenue", href: "/finance/revenue" },
+      { icon: BanknoteArrowDown, label: "Expenses", href: "/finance/expenses" },
+      { icon: FileText, label: "Reports", href: "/finance/reports" },
+    ]
+  }
 ]
 
 export default function Sidebar({ className = "", ...props }) {
@@ -87,28 +97,14 @@ export default function Sidebar({ className = "", ...props }) {
       >
         <div className="flex h-full flex-col">
           {/* Header */}
-          <div className="flex h-16 items-center justify-between px-4 border-b border-gray-200">
-            {!isCollapsed && <h2 className="text-lg font-semibold text-gray-900">Dashboard</h2>}
-          </div>
-
-          {/* Navigation */}
-          <nav className="flex-1 space-y-1 p-4">{sidebarItems.map(renderNavItem)}</nav>
-
-          {/* Header */}
-          <div className="flex h-16 items-center justify-between px-4 border-b border-gray-200">
-            {!isCollapsed && <h2 className="text-lg font-semibold text-gray-900">Human Resources</h2>}
-          </div>
-
-          {/* Navigation */}
-          <nav className="flex-1 space-y-1 p-4">{sidebarItems2.map(renderNavItem)}</nav>
-
-          {/* Header */}
-          <div className="flex h-16 items-center justify-between px-4 border-b border-gray-200">
-            {!isCollapsed && <h2 className="text-lg font-semibold text-gray-900">Financial Management</h2>}
-          </div>
-
-          {/* Navigation */}
-          <nav className="flex-1 space-y-1 p-4">{sidebarItems3.map(renderNavItem)}</nav>
+          {sidebarConfig.map((section, index) => (
+            <div key={index}>
+              <div className="flex items-center justify-between px-4 border-b border-gray-200 mt-4">
+                {!isCollapsed && <h2 className="text-lg font-semibold text-gray-900">{section.name}</h2>}
+              </div>
+              <nav className="my-2">{section.items.map(renderNavItem)}</nav>
+            </div>
+          ))}
         </div>
       </aside>
     </>
